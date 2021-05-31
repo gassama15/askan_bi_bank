@@ -27,7 +27,9 @@
                             placeholder="Numero telephone de votre agence">
                     </div>
 
-                    <button type="submit" class="mt-4 mb-4 btn btn-primary btn-block">Créer</button>
+                    <div class="d-grid">
+                        <button type="submit" class="mt-4 mb-4 btn btn-primary btn-lg">Créer</button>
+                    </div>
                 </fieldset>
             </form>
         </div>

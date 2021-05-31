@@ -62,4 +62,9 @@ abstract class Model
         );
         $query->execute(['id' => $id]);
     }
+
+    public function getPdo()
+    {
+        return $this->pdo;
+    }
 }

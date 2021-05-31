@@ -3,7 +3,6 @@ namespace App\Controllers;
 
 use App\Renderer;
 use App\Models\AgenceModel;
-use App\Controllers\Controller;
 
 class AgenceController extends Controller
 {

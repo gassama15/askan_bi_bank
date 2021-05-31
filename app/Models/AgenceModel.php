@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use App\Http;
-use App\Models\Model;
 
 class AgenceModel extends Model
 {

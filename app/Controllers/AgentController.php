@@ -4,7 +4,6 @@ namespace App\Controllers;
 use App\Renderer;
 use App\Models\AgentModel;
 use App\Models\AgenceModel;
-use App\Controllers\Controller;
 
 class AgentController extends Controller
 {
