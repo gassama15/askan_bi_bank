@@ -3,20 +3,23 @@ namespace App\Models;
 
 class UserModel extends Model
 {
+    protected $table = 'agent';
+
     /**
-     * find
+     * findByLoginAndPassword
      *
-     * @param  mixed $id
+     * @param  mixed $login
+     * @param  mixed $password
      * @return void
      */
-    public function findByLogin(string $login)
+    public function findByLoginAndPassword(string $login, string $password)
     {
         $query = $this->pdo->prepare(
-            "SELECT * FROM  {$this->table} WHERE login = :login"
+            "SELECT * FROM  {$this->table} WHERE login = :login AND password = :password"
         );
 
-        $query->execute(['login' => $login]);
-        $item = $query->fetch();
-        return $item;
+        $query->execute(['login' => $login, 'password' => $password]);
+        $user = $query->fetch(\PDO::FETCH_OBJ);
+        return $user;
     }
 }

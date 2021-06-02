@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Http;
 use App\Renderer;
 use App\Models\AgenceModel;
 
@@ -10,6 +11,10 @@ class AgenceController extends Controller
 
     public function create()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
         Renderer::render('agence/create');
     }
 

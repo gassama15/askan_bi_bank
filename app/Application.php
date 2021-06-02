@@ -1,13 +1,11 @@
 <?php
 namespace App;
 
-use App\Controllers\AdminController;
-
 class Application
 {
     public static function process()
     {
-        $controllerName = 'AdminController';
+        $controllerName = 'AuthController';
         $task = 'index';
 
         if (!empty($_GET['controller'])) {

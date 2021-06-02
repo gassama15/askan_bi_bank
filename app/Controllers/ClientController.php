@@ -28,6 +28,11 @@ class ClientController extends Controller
 
     public function create()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
+
         $agences = $this->agenceModel->findAll();
         $agents = $this->agentModel->findAll();
         $comptes = $this->typeCompteModel->findAll();

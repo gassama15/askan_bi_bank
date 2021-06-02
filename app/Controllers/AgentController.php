@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Http;
 use App\Renderer;
 use App\Models\AgentModel;
 use App\Models\AgenceModel;
@@ -12,6 +13,10 @@ class AgentController extends Controller
 
     public function create()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
         $this->agenceModel = new $this->agenceModel();
         $agences = $this->agenceModel->findAll();
         // var_dump($agences);

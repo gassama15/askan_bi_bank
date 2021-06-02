@@ -29,6 +29,10 @@
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">Services</a>
                         <div class="dropdown-menu">
+                            <?php if (isset($_SESSION['auth'])): ?>
+                            <?php if (
+                                $session->read('auth')->role === 'admin'
+                            ): ?>
                             <a class="dropdown-item" href="index.php?controller=agenceController&task=create">Créer une
                                 agence</a>
                             <a class="dropdown-item" href="index.php?controller=agentController&task=create">Créer un
@@ -36,7 +40,10 @@
                             <a class="dropdown-item" href="index.php?controller=typeCompteController&task=create">Créer
                                 un
                                 noveau type de compte</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="index.php?controller=clientController&task=create">Créer un
+                                compte</a>
+                            <?php endif; ?>
+                            <?php endif; ?>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
@@ -62,13 +69,29 @@
                         </div>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                <ul class="navbar-nav ml-auto">
+                    <?php if (isset($_SESSION['auth'])): ?>
+                    <li class="nav-item">
+                        <a href="index.php?controller=authController&task=logout" class="nav-link">Déconnexion</a>
+                    </li>
+                    <?php else: ?>
+                    <li class="nav-item">
+                        <a href="index.php?controller=authController&task=index" class="nav-link">Connexion</a>
+                    </li>
+                    <?php endif; ?>
+                </ul>
             </div>
         </div>
     </nav>
+    <div class="container">
+        <?php if ($session->hasFlashes()): ?>
+        <?php foreach ($session->getFlashes() as $type => $message): ?>
+        <div class="alert alert-<?= $type ?>">
+            <?= $message ?>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
     <?= $pageContent ?>
 </body>
 
