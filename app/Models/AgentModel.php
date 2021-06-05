@@ -30,8 +30,6 @@ class AgentModel extends Model
                 'password'
             )
         );
-
-        Http::redirect('index.php?controller=agentController&task=create');
     }
 
     /**
@@ -76,5 +74,13 @@ class AgentModel extends Model
                 'idAgent'
             )
         );
+    }
+
+    public function delete($idAgent)
+    {
+        $query = $this->pdo->prepare(
+            'DELETE FROM agent WHERE idAgent = :idAgent'
+        );
+        $query->execute(compact('idAgent'));
     }
 }

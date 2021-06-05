@@ -43,6 +43,8 @@ class AgentController extends Controller
                 $login,
                 $password
             );
+            $this->session->setFlash('success', 'Agent créé avec succés');
+            Http::redirect('index.php?controller=agentController&task=index');
         }
     }
 
@@ -86,6 +88,15 @@ class AgentController extends Controller
             );
 
             $this->session->setFlash('success', 'Agent modifié avec succés');
+            Http::redirect('index.php?controller=agentController&task=index');
+        }
+    }
+
+    public function delete()
+    {
+        if (isset($_GET['id'])) {
+            $this->model->delete($_GET['id']);
+            $this->session->setFlash('success', 'Agent supprimé avec succés');
             Http::redirect('index.php?controller=agentController&task=index');
         }
     }
