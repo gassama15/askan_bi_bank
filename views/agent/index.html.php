@@ -25,7 +25,8 @@
                 <td><?= $agent->login ?></td>
                 <td><?= $agent->password ?></td>
                 <td>
-                    <span><a href="#"><i class="fas fa-edit text-warning"></i></a></span> -
+                    <span><a href="index.php?controller=agentController&task=edit&id=<?= $agent->idAgent ?>"><i
+                                class="fas fa-edit text-warning"></i></a></span> -
                     <span><a href="#"><i class="fas fa-trash text-danger"></i></a></span>
                 </td>
             </tr>

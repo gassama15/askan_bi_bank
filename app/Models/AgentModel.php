@@ -43,11 +43,38 @@ class AgentModel extends Model
     public function find(int $id)
     {
         $query = $this->pdo->prepare(
-            "SELECT * FROM  {$this->table} WHERE idAgence = :id"
+            "SELECT * FROM  {$this->table} WHERE idAgent = :id"
         );
 
         $query->execute(['id' => $id]);
-        $item = $query->fetch();
+        $item = $query->fetch(\PDO::FETCH_OBJ);
         return $item;
+    }
+
+    public function edit(
+        $num_agent,
+        $nom,
+        $prenom,
+        $role,
+        $idAgence,
+        $login,
+        $password,
+        $idAgent
+    ) {
+        $query = $this->pdo->prepare(
+            'UPDATE agent SET num_agent = :num_agent, nom = :nom, prenom = :prenom, role = :role, idAgence = :idAgence, login = :login, password = :password WHERE idAgent = :idAgent'
+        );
+        $query->execute(
+            compact(
+                'num_agent',
+                'nom',
+                'prenom',
+                'role',
+                'idAgence',
+                'login',
+                'password',
+                'idAgent'
+            )
+        );
     }
 }

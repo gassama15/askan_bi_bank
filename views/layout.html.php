@@ -45,6 +45,8 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="index.php?controller=agenceController&task=index">Lister les
                                 agences</a>
+                            <a class="dropdown-item" href="index.php?controller=agentController&task=index">Lister les
+                                agents</a>
                         </div>
                     </li>
                     <?php endif; ?>

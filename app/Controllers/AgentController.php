@@ -59,4 +59,34 @@ class AgentController extends Controller
 
         Renderer::render('agent/index', compact('agents'));
     }
+
+    public function edit()
+    {
+        if (isset($_GET['id'])) {
+            $agent = $this->model->find($_GET['id']);
+            $agences = $this->agenceModel->findAll();
+            Renderer::render('agent/edit', compact('agent', 'agences'));
+        }
+    }
+
+    public function update()
+    {
+        if (!empty($_POST)) {
+            extract($_POST);
+
+            $this->model->edit(
+                $num_agent,
+                $nom,
+                $prenom,
+                $role,
+                $idAgence,
+                $login,
+                $password,
+                $idAgent
+            );
+
+            $this->session->setFlash('success', 'Agent modifié avec succés');
+            Http::redirect('index.php?controller=agentController&task=index');
+        }
+    }
 }
