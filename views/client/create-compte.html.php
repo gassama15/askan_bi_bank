@@ -6,33 +6,36 @@
                     <legend>Client</legend>
                     <div class="form-group">
                         <label for="nom" class="form-label mt-4">Nom</label>
-                        <input name="nom" type="text" class="form-control" id="nom"
+                        <input required name="nom" type="text" class="form-control" id="nom"
                             placeholder="Entrez le nom de l'agent">
                     </div>
                     <div class="form-group">
                         <label for="prenom" class="form-label mt-4">Prénom</label>
-                        <input name="prenom" type="text" class="form-control" id="prenom"
+                        <input required name="prenom" type="text" class="form-control" id="prenom"
                             placeholder="Entrez le prenom de l'agent">
                     </div>
                     <div class="form-group">
                         <label for="adresse" class="form-label mt-4">Adresse du client</label>
-                        <input name="adresse" type="text" class="form-control" id="adresse"
+                        <input required name="adresse" type="text" class="form-control" id="adresse"
                             placeholder="Adresse du client">
                     </div>
 
                     <div class="form-group">
                         <label for="tel" class="form-label mt-4">Téléphone du client</label>
-                        <input name="tel" type="tel" class="form-control" id="tel" placeholder="Téléphone du client">
+                        <input required name="tel" type="tel" class="form-control" id="tel"
+                            placeholder="Téléphone du client">
                     </div>
 
                     <div class="form-group">
                         <label for="cni" class="form-label mt-4">CNI</label>
-                        <input name="cni" type="number" class="form-control" id="cni" placeholder="CNI du client">
+                        <input required name="cni" type="number" class="form-control" id="cni"
+                            placeholder="CNI du client">
                     </div>
 
                     <div class="form-group">
                         <label for="email" class="form-label mt-4">Email du client</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="Email du client">
+                        <input required name="email" type="email" class="form-control" id="email"
+                            placeholder="Email du client">
                     </div>
                     <div class="row p-3">
                         <div class="col">
@@ -63,14 +66,18 @@
                     </legend>
                     <div class="form-group">
                         <label for="solde" class="form-label mt-4">Solde</label>
-                        <input name="solde" type="number" class="form-control" id="solde" placeholder="Solde">
+                        <input required name="solde" type="number" class="form-control" id="solde" placeholder="Solde">
                     </div>
                     <div class="form-group">
                         <label for="idAgence" class="form-label mt-4">Agence</label>
                         <select class="form-select" name="idAgence" id="idAgence">
                             <option>Sélecionner votre agence</option>
                             <?php foreach ($agences as $agence): ?>
-                            <option value="<?= $agence->idAgence ?>"><?= $agence->nom ?></option>
+                            <option value="<?= $agence->idAgence ?>" <?= $session->read(
+    'auth'
+)->idAgence == $agence->idAgence
+    ? 'selected'
+    : null ?>><?= $agence->nom ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -79,7 +86,11 @@
                         <select class="form-select" name="idAgent" id="idAgent">
                             <option>Sélecionner votre agent</option>
                             <?php foreach ($agents as $agent): ?>
-                            <option value="<?= $agent->idAgent ?>">
+                            <option value="<?= $agent->idAgent ?>" <?= $session->read(
+    'auth'
+)->idAgent == $agent->idAgent
+    ? 'selected'
+    : null ?>>
                                 <?= $agent->nom .
                                     ' ' .
                                     $agent->prenom ?></option>

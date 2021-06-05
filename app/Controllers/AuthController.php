@@ -45,6 +45,10 @@ class AuthController extends Controller
 
     public function index()
     {
+        if ($this->session->read('auth')) {
+            $this->session->setFlash('danger', 'Vous êtes déjà connectés');
+            Http::redirect('index.php?controller=clientController&task=create');
+        }
         Renderer::render('auth/login');
     }
 
@@ -53,12 +57,21 @@ class AuthController extends Controller
         if (!empty($_POST)) {
             extract($_POST);
             $user = $this->model->findByLoginAndPassword($login, $password);
-            $this->connect($user);
+            if ($user) {
+                $this->connect($user);
+                $this->session->setFlash(
+                    'success',
+                    'Dalal ak diam si askan bi bank'
+                );
+                Http::redirect(
+                    'index.php?controller=agenceController&task=create'
+                );
+            }
             $this->session->setFlash(
-                'success',
-                'Dalal ak diam si askan bi bank'
+                'danger',
+                'Login et/ou mot de passe invalide(s)'
             );
-            Http::redirect('index.php?controller=agenceController&task=create');
+            Renderer::render('auth/login', ['login' => $_POST['login']]);
         }
     }
 

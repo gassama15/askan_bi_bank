@@ -8,15 +8,16 @@
                     <legend>Authentification</legend>
                     <div class="form-group">
                         <label for="login" class="form-label mt-4">Login</label>
-                        <input name="login" type="text" class="form-control" id="login" aria-describedby="emailHelp"
-                            placeholder="Entrez votre login">
+                        <input required name="login" type="text" class="form-control" id="login"
+                            aria-describedby="emailHelp" placeholder="Entrez votre login" value="<?= $login ??
+                                '' ?>">
                         <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre login avec
                             qui
                             que ce soit.</small>
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-label mt-4">Mot de passe</label>
-                        <input name="password" type="password" class="form-control" id="password"
+                        <input required name="password" type="password" class="form-control" id="password"
                             placeholder="Entrez votre mot de passe">
                     </div>
                     <div class="d-grid">
