@@ -11,13 +11,19 @@ class AgentController extends Controller
     protected $modelName = AgentModel::class;
     protected $agenceModel = AgenceModel::class;
 
+    public function __construct()
+    {
+        $this->agenceModel = new $this->agenceModel();
+        parent::__construct();
+    }
+
     public function create()
     {
         if (is_null($this->session->read('auth'))) {
             $this->session->setFlash('danger', 'Veuillez vous authentifier');
             Http::redirect('index.php?controller=authController&task=index');
         }
-        $this->agenceModel = new $this->agenceModel();
+        // $this->agenceModel = new $this->agenceModel();
         $agences = $this->agenceModel->findAll();
         // var_dump($agences);
         Renderer::render('agent/create', compact('agences'));
@@ -38,5 +44,19 @@ class AgentController extends Controller
                 $password
             );
         }
+    }
+
+    public function index()
+    {
+        // $this->agenceModel = new $this->agenceModel();
+        $agents = $this->model->findAll('idAgent DESC');
+
+        foreach ($agents as $key => $value) {
+            $agents[$key]->nom_agence = $this->agenceModel->find(
+                $value->idAgence
+            )->nom;
+        }
+
+        Renderer::render('agent/index', compact('agents'));
     }
 }
