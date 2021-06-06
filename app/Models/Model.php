@@ -41,10 +41,10 @@ abstract class Model
     public function find(int $id)
     {
         $query = $this->pdo->prepare(
-            "SELECT * FROM  {$this->table} WHERE id = :id"
+            "SELECT * FROM  {$this->table} WHERE idAgent = :idAgent"
         );
 
-        $query->execute(['id' => $id]);
+        $query->execute(['idAgent' => $id]);
         $item = $query->fetch();
         return $item;
     }

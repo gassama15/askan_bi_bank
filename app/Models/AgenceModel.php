@@ -17,4 +17,15 @@ class AgenceModel extends Model
 
         Http::redirect('index.php?controller=agenceController&task=create');
     }
+
+    public function find(int $id)
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM  {$this->table} WHERE idAgence = :idAgence"
+        );
+
+        $query->execute(['idAgence' => $id]);
+        $item = $query->fetch(\PDO::FETCH_OBJ);
+        return $item;
+    }
 }

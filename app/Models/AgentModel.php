@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use App\Http;
-use App\Models\Model;
 
 class AgentModel extends Model
 {
@@ -31,7 +30,57 @@ class AgentModel extends Model
                 'password'
             )
         );
+    }
 
-        Http::redirect('index.php?controller=agentController&task=create');
+    /**
+     * find
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function find(int $id)
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM  {$this->table} WHERE idAgent = :id"
+        );
+
+        $query->execute(['id' => $id]);
+        $item = $query->fetch(\PDO::FETCH_OBJ);
+        return $item;
+    }
+
+    public function edit(
+        $num_agent,
+        $nom,
+        $prenom,
+        $role,
+        $idAgence,
+        $login,
+        $password,
+        $idAgent
+    ) {
+        $query = $this->pdo->prepare(
+            'UPDATE agent SET num_agent = :num_agent, nom = :nom, prenom = :prenom, role = :role, idAgence = :idAgence, login = :login, password = :password WHERE idAgent = :idAgent'
+        );
+        $query->execute(
+            compact(
+                'num_agent',
+                'nom',
+                'prenom',
+                'role',
+                'idAgence',
+                'login',
+                'password',
+                'idAgent'
+            )
+        );
+    }
+
+    public function delete($idAgent)
+    {
+        $query = $this->pdo->prepare(
+            'DELETE FROM agent WHERE idAgent = :idAgent'
+        );
+        $query->execute(compact('idAgent'));
     }
 }
