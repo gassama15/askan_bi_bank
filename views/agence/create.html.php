@@ -26,6 +26,7 @@
                         <input name="tel" type="tel" class="form-control" id="tel"
                             placeholder="Numero telephone de votre agence">
                     </div>
+                    
 
                     <button type="submit" class="mt-4 mb-4 btn btn-primary btn-block">Créer</button>
                 </fieldset>

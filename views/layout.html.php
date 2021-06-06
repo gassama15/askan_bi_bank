@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js" integrity="sha512-7dlzSK4Ulfm85ypS8/ya0xLf3NpXiML3s6HTLu4qDq7WiJWtLLyrXb9putdP3/1umwTmzIvhuu9EW7gHYSVtCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link href="https://bootswatch.com/5/flatly/bootstrap.min.css" rel="stylesheet">
@@ -33,14 +34,17 @@
                                 agence</a>
                             <a class="dropdown-item" href="index.php?controller=agentController&task=create">Créer un
                                 agent</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="index.php?controller=clientController&task=create">Créer un
+                                client</a>.<a class="dropdown-item" href="index.php?controller=compteController&task=create">Créer un
+                                compte</a>.
+                            <a class="dropdown-item" href="index.php?controller=agentController&task=listeage">liste de agent</a>
+                            <a class="dropdown-item" href="index.php?controller=operationController&task=create">operation</a>ss
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Separated link</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="index.php?controller=contactController&task=create">CONTACT</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
@@ -67,7 +71,7 @@
             </div>
         </div>
     </nav>
-    <?= $pageContent ?>
+    <?=  $pageContent  ?>
 </body>
 
 </html>

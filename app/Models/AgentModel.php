@@ -31,7 +31,5 @@ class AgentModel extends Model
                 'password'
             )
         );
-
-        Http::redirect('index.php?controller=agentController&task=create');
-    }
-}
+      Http::redirect('index.php?controller=agentController&task=create');
+}    }

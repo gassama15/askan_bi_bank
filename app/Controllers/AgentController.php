@@ -4,12 +4,13 @@ namespace App\Controllers;
 use App\Renderer;
 use App\Models\AgentModel;
 use App\Models\AgenceModel;
-use App\Controllers\Controller;
 
 class AgentController extends Controller
 {
     protected $modelName = AgentModel::class;
     protected $agenceModel = AgenceModel::class;
+    protected $agentModel = AgentModel::class;
+
 
     public function create()
     {
@@ -18,7 +19,14 @@ class AgentController extends Controller
         // var_dump($agences);
         Renderer::render('agent/create', compact('agences'));
     }
-
+    public function listeage()
+    {
+        $this->agentModel = new $this->agentModel();
+        $agents = $this->agentModel->findAll();
+    // var_dump($agents);
+        Renderer::render('agent/create', compact('agents'));
+    }    
+    
     public function add()
     {
         if (!empty($_POST)) {

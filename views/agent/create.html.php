@@ -36,7 +36,7 @@
                             <option value="user">Agent</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                        <div class="form-group">
                         <label for="idAgence" class="form-label mt-4">Agence</label>
                         <select class="form-select" name="idAgence" id="idAgence">
                             <option>Sélecionner votre agence</option>
