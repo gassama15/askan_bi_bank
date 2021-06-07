@@ -44,4 +44,15 @@ class ClientModel extends Model
         $items = $resultats->fetchAll(\PDO::FETCH_OBJ);
         return $items;
     }
+
+    public function findSingleClientWithAccount($idClient)
+    {
+        $sql = "SELECT * FROM {$this->table} cli, {$this->table_compte} cpt WHERE cli.idClient = :idClient AND cpt.idClient = :idClient";
+
+        $query = $this->pdo->prepare($sql);
+
+        $query->execute(compact('idClient'));
+        $item = $query->fetch(\PDO::FETCH_OBJ);
+        return $item;
+    }
 }

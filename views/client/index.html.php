@@ -23,6 +23,8 @@
                 <td><?= $client->date_ouverture ?></td>
                 <td><?= $client->statut == 1 ? 'Actif' : 'Inactif' ?></td>
                 <td>
+                    <span><a href="index.php?controller=clientController&task=show&id=<?= $client->idClient ?>"><i
+                                class="fas fa-eye text-info"></i></a></span> -
                     <span><a href=""><i class="fas fa-edit text-warning"></i></a></span> -
                     <span><a onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer?')" href=""><i
                                 class="fas fa-trash text-danger"></i></a></span>

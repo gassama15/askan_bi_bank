@@ -47,6 +47,8 @@
                                 agences</a>
                             <a class="dropdown-item" href="index.php?controller=agentController&task=index">Lister les
                                 agents</a>
+                            <a class="dropdown-item" href="index.php?controller=clientController&task=index">Lister les
+                                clients</a>
                         </div>
                     </li>
                     <?php endif; ?>

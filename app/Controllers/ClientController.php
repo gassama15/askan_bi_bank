@@ -75,7 +75,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = $this->model->findAllWithAccount();
+        $clients = $this->model->findAllWithAccount('idClient DESC');
         foreach ($clients as $k => $v) {
             $clients[$k]->date_ouverture = $this->formateDate(
                 $v->date_ouverture
@@ -89,8 +89,38 @@ class ClientController extends Controller
         Renderer::render('client/index', compact('clients'));
     }
 
+    public function show()
+    {
+        if (isset($_GET['id'])) {
+            $client = $this->model->findSingleClientWithAccount($_GET['id']);
+            // var_dump($client);
+            // die();
+
+            $client->date_ouverture = $this->formateDate(
+                $client->date_ouverture
+            );
+            $client->solde = $this->formateNumber($client->solde);
+
+            $typeCompte = $this->typeCompteModel->findCompteWithTypeCompte(
+                $client->idtypeCompte
+            );
+
+            // var_dump($typeCompte);
+            // die();
+
+            $client->libelleType = $typeCompte->libelleType;
+
+            Renderer::render('client/show', compact('client'));
+        }
+    }
+
     private function formateDate(string $date)
     {
         return date('d-m-Y', strtotime($date));
+    }
+
+    private function formateNumber(float $number)
+    {
+        return number_format($number, 0, ',', ' ');
     }
 }
