@@ -21,7 +21,8 @@
                 <td>
                     <span><a href="index.php?controller=agenceController&task=edit&id=<?= $agence->idAgence ?>"><i
                                 class="fas fa-edit text-warning"></i></a></span> -
-                    <span><a href="index.php?controller=agenceController&task=delete&id=<?= $agence->idAgence ?>"><i
+                    <span><a onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer?')"
+                            href="index.php?controller=agenceController&task=delete&id=<?= $agence->idAgence ?>"><i
                                 class="fas fa-trash text-danger"></i></a></span>
                 </td>
             </tr>

@@ -45,7 +45,6 @@
                     <div class="form-group">
                         <label for="idAgence" class="form-label mt-4">Agence</label>
                         <select class="form-select" name="idAgence" id="idAgence">
-                            <option>Sélecionner votre agence</option>
                             <?php foreach ($agences as $agence): ?>
                             <option value="<?= $agence->idAgence ?>" <?= $agent->idAgence ==
 $agence->idAgence
@@ -56,7 +55,7 @@ $agence->idAgence
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="mt-4 mb-4 btn btn-primary btn-lg">Créer</button>
+                        <button type="submit" class="mt-4 mb-4 btn btn-primary btn-lg">Enregistrer</button>
                     </div>
                 </fieldset>
             </form>

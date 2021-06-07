@@ -72,4 +72,25 @@ class ClientController extends Controller
 
         Http::redirect('index.php?controller=clientController&task=create');
     }
+
+    public function index()
+    {
+        $clients = $this->model->findAllWithAccount();
+        foreach ($clients as $k => $v) {
+            $clients[$k]->date_ouverture = $this->formateDate(
+                $v->date_ouverture
+            );
+            // if ($k == 'date_ouverture') {
+            //     $clients[$k]->date_ouverture = $this->formateDate(
+            //         $v->date_ouverture
+            //     );
+            // }
+        }
+        Renderer::render('client/index', compact('clients'));
+    }
+
+    private function formateDate(string $date)
+    {
+        return date('d-m-Y', strtotime($date));
+    }
 }

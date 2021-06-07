@@ -27,7 +27,8 @@
                 <td>
                     <span><a href="index.php?controller=agentController&task=edit&id=<?= $agent->idAgent ?>"><i
                                 class="fas fa-edit text-warning"></i></a></span> -
-                    <span><a href="index.php?controller=agentController&task=delete&id=<?= $agent->idAgent ?>"><i
+                    <span><a onclick="return confirm('Êtes-vous sûr(e) de vouloir supprimer?')"
+                            href="index.php?controller=agentController&task=delete&id=<?= $agent->idAgent ?>"><i
                                 class="fas fa-trash text-danger"></i></a></span>
                 </td>
             </tr>
