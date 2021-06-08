@@ -51,22 +51,67 @@ class OperationController extends Controller
     public function create()
     {
         if (!empty($_POST)) {
-            extract($_POST);
             $idCompte = $this->session->read('idCompte');
             $idAgent = $this->session->read('auth')->idAgent;
-            $this->session->delete('idCompte');
-            $this->model->getPdo()->beginTransaction();
-            $this->model->insert($typeOperation, $montant, $idCompte, $idAgent);
-            $this->compteModel->updateAmount($montant, $idCompte);
-            $this->model->getPdo()->commit();
+            extract($_POST);
+            if ($typeOperation == 'retrait') {
+                $amountIsAvailable = $this->isAmountAvailable(
+                    $montant,
+                    $idCompte
+                );
 
-            $this->session->setFlash(
-                'success',
-                'Opération réussie avec succés'
-            );
-            Http::redirect(
-                'index.php?controller=operationController&task=start'
-            );
+                if ($amountIsAvailable == true) {
+                    $this->model->getPdo()->beginTransaction();
+                    $this->model->insert(
+                        $typeOperation,
+                        $montant,
+                        $idCompte,
+                        $idAgent
+                    );
+                    $this->compteModel->decreaseAmount($montant, $idCompte);
+                    $this->model->getPdo()->commit();
+
+                    $this->session->setFlash(
+                        'success',
+                        'Opération réussie avec succés'
+                    );
+                    Http::redirect(
+                        'index.php?controller=operationController&task=start'
+                    );
+                } else {
+                    $this->session->setFlash(
+                        'danger',
+                        'Votre solde est inférieur au montant que vous souhaitez retirer.'
+                    );
+                    Renderer::render('operation/process', [
+                        'montant' => $_POST['montant'],
+                        'typeOperation' => 'retrait',
+                    ]);
+                }
+            } else {
+                $this->model->getPdo()->beginTransaction();
+                $this->model->insert(
+                    $typeOperation,
+                    $montant,
+                    $idCompte,
+                    $idAgent
+                );
+                $this->compteModel->increaseAmount($montant, $idCompte);
+                $this->model->getPdo()->commit();
+
+                $this->session->setFlash(
+                    'success',
+                    'Opération réussie avec succés'
+                );
+                Http::redirect(
+                    'index.php?controller=operationController&task=start'
+                );
+            }
         }
+    }
+
+    private function isAmountAvailable(int $montant, int $idCompte)
+    {
+        return $this->compteModel->getActualSolde($idCompte) > $montant;
     }
 }

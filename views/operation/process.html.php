@@ -4,14 +4,17 @@
             <form action="index.php?controller=operationController&task=create" method="POST">
                 <div class="form-group">
                     <label for="montant" class="form-label mt-4">Montant</label>
-                    <input id="montant" name="montant" type="number" class="form-control">
+                    <input required id="montant" value="<?= $montant ??
+                        '' ?>" name="montant" type="number" class="form-control">
                 </div>
                 <div class="row p-3">
                     <div class="col">
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="typeOperation" id="optionsRadios3"
-                                    value="depot" checked>
+                                    value="depot" <?= isset($typeOperation)
+                                        ? ''
+                                        : 'checked' ?>>
                                 Dépôt
                             </label>
                         </div>
@@ -20,7 +23,9 @@
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="typeOperation" id="optionsRadios3"
-                                    value="retrait">
+                                    value="retrait" <?= isset($typeOperation)
+                                        ? 'checked'
+                                        : '' ?>>
                                 Retrait
                             </label>
                         </div>

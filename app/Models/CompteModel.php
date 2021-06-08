@@ -48,7 +48,7 @@ class CompteModel extends Model
         return $result;
     }
 
-    public function updateAmount(int $solde, $idCompte)
+    public function increaseAmount(int $solde, $idCompte)
     {
         $solde += $this->getActualSolde($idCompte);
 
@@ -58,7 +58,17 @@ class CompteModel extends Model
         $query->execute(compact('solde', 'idCompte'));
     }
 
-    private function getActualSolde(int $idCompte)
+    public function decreaseAmount(int $solde, $idCompte)
+    {
+        $solde = $this->getActualSolde($idCompte) - $solde;
+
+        $sql = "UPDATE {$this->table} SET solde = :solde WHERE idCompte = :idCompte";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('solde', 'idCompte'));
+    }
+
+    public function getActualSolde(int $idCompte)
     {
         $sql = "SELECT solde FROM {$this->table} WHERE idCompte = :idCompte";
         $query = $this->pdo->prepare($sql);
