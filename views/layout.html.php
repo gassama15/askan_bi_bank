@@ -31,48 +31,49 @@
                     <?php if ($session->read('auth')->role === 'admin'): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Services</a>
+                            aria-haspopup="true" aria-expanded="false">Gestion des Agences</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="index.php?controller=agenceController&task=create">Créer une
                                 agence</a>
-                            <a class="dropdown-item" href="index.php?controller=agentController&task=create">Créer un
-                                agent</a>
-                            <a class="dropdown-item" href="index.php?controller=typeCompteController&task=create">Créer
-                                un
-                                noveau type de compte</a>
-                            <a class="dropdown-item" href="index.php?controller=clientController&task=create">Créer un
-                                compte</a>
-                            <div class="dropdown-divider"></div>
+                            <!-- <div class="dropdown-divider"></div> -->
                             <a class="dropdown-item" href="index.php?controller=agenceController&task=index">Lister les
                                 agences</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Gestion des Agents</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?controller=agentController&task=create">Créer un
+                                agent</a>
                             <a class="dropdown-item" href="index.php?controller=agentController&task=index">Lister les
                                 agents</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Gestion des Clients</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?controller=clientController&task=create">Créer un
+                                compte</a>
                             <a class="dropdown-item" href="index.php?controller=clientController&task=index">Lister les
                                 clients</a>
                         </div>
                     </li>
                     <?php endif; ?>
                     <?php endif; ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
+                    <?php if (isset($_SESSION['auth'])): ?>
+                    <?php if ($session->read('auth')->role === 'user'): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            aria-haspopup="true" aria-expanded="false">Ouverture de Compte</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
+                            <a class="dropdown-item" href="index.php?controller=clientController&task=create">Créer un
+                                compte</a>
                         </div>
                     </li>
+                    <?php endif; ?>
+                    <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['auth'])): ?>

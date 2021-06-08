@@ -37,4 +37,34 @@ class CompteModel extends Model
             )
         );
     }
+
+    public function isValidNumber(string $num_compte)
+    {
+        $sql = "SELECT num_compte, idCompte FROM {$this->table} WHERE num_compte = :num_compte";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('num_compte'));
+        $result = $query->fetch(\PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    public function updateAmount(int $solde, $idCompte)
+    {
+        $solde += $this->getActualSolde($idCompte);
+
+        $sql = "UPDATE {$this->table} SET solde = :solde WHERE idCompte = :idCompte";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('solde', 'idCompte'));
+    }
+
+    private function getActualSolde(int $idCompte)
+    {
+        $sql = "SELECT solde FROM {$this->table} WHERE idCompte = :idCompte";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('idCompte'));
+        $result = $query->fetch(\PDO::FETCH_OBJ);
+
+        return $result->solde;
+    }
 }
