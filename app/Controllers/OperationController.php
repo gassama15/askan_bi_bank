@@ -19,11 +19,19 @@ class OperationController extends Controller
 
     public function start()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
         Renderer::render('operation/operation');
     }
 
     public function verify()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
         if (isset($_POST['num_compte'])) {
             $result = $this->compteModel->isValidNumber($_POST['num_compte']);
             // var_dump($result);
@@ -45,11 +53,19 @@ class OperationController extends Controller
 
     public function process()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
         Renderer::render('operation/process');
     }
 
     public function create()
     {
+        if (is_null($this->session->read('auth'))) {
+            $this->session->setFlash('danger', 'Veuillez vous authentifier');
+            Http::redirect('index.php?controller=authController&task=index');
+        }
         if (!empty($_POST)) {
             $idCompte = $this->session->read('idCompte');
             $idAgent = $this->session->read('auth')->idAgent;
@@ -75,6 +91,8 @@ class OperationController extends Controller
                         'success',
                         'Opération réussie avec succés'
                     );
+                    $this->session->delete('idCompte');
+                    $this->session->delete('num_compte');
                     Http::redirect(
                         'index.php?controller=operationController&task=start'
                     );
@@ -103,6 +121,8 @@ class OperationController extends Controller
                     'success',
                     'Opération réussie avec succés'
                 );
+                $this->session->delete('idCompte');
+                $this->session->delete('num_compte');
                 Http::redirect(
                     'index.php?controller=operationController&task=start'
                 );

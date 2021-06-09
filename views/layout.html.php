@@ -60,6 +60,14 @@
                                 clients</a>
                         </div>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Gestion des opérations</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?controller=operationController&task=start">Nouvelle
+                                opération</a>
+                        </div>
+                    </li>
                     <?php endif; ?>
                     <?php endif; ?>
                     <?php if (isset($_SESSION['auth'])): ?>
@@ -70,6 +78,14 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="index.php?controller=clientController&task=create">Créer un
                                 compte</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Gestion des opérations</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?controller=operationController&task=start">Nouvelle
+                                opération</a>
                         </div>
                     </li>
                     <?php endif; ?>

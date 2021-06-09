@@ -4,7 +4,8 @@
             <form action="index.php?controller=operationController&task=verify" method="post">
                 <div class="form-group">
                     <label for="num_compte" class="form-label mt-4">Numéro de compte</label>
-                    <input id="num_compte" name="num_compte" type="text" class="form-control" value="<?= $num_compte ??
+                    <input autocomplete="off" required id="num_compte" name="num_compte" type="text"
+                        class="form-control" value="<?= $num_compte ??
                         '' ?>">
                 </div>
                 <div class="d-grid">

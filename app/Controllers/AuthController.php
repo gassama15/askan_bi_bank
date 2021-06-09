@@ -47,7 +47,7 @@ class AuthController extends Controller
     {
         if ($this->session->read('auth')) {
             $this->session->setFlash('danger', 'Vous êtes déjà connectés');
-            Http::redirect('index.php?controller=clientController&task=create');
+            Http::redirect('index.php?controller=authController&task=espace');
         }
         Renderer::render('auth/login');
     }
@@ -64,7 +64,7 @@ class AuthController extends Controller
                     'Dalal ak diam si askan bi bank'
                 );
                 Http::redirect(
-                    'index.php?controller=agenceController&task=create'
+                    'index.php?controller=authController&task=espace'
                 );
             }
             $this->session->setFlash(
@@ -80,5 +80,10 @@ class AuthController extends Controller
         $this->session->delete('auth');
         $this->session->setFlash('success', 'Nio ngui lay jajeufeul');
         Http::redirect('index.php?controller=authController&task=index');
+    }
+
+    public function espace()
+    {
+        Renderer::render('app/home');
     }
 }
