@@ -66,6 +66,9 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="index.php?controller=operationController&task=start">Nouvelle
                                 opération</a>
+                            <a class="dropdown-item"
+                                href="index.php?controller=compteController&task=start">Consultation
+                                Solde</a>
                         </div>
                     </li>
                     <?php endif; ?>
@@ -86,6 +89,9 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="index.php?controller=operationController&task=start">Nouvelle
                                 opération</a>
+                            <a class="dropdown-item"
+                                href="index.php?controller=compteController&task=start">Consultation
+                                Solde</a>
                         </div>
                     </li>
                     <?php endif; ?>

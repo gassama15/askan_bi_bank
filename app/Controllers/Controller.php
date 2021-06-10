@@ -15,4 +15,9 @@ abstract class Controller
         $this->model = new $this->modelName();
         $this->session = Session::getInstance();
     }
+
+    public function formateNumber(float $number)
+    {
+        return number_format($number, 0, ',', ' ');
+    }
 }

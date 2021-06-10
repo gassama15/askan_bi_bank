@@ -118,9 +118,4 @@ class ClientController extends Controller
     {
         return date('d-m-Y', strtotime($date));
     }
-
-    private function formateNumber(float $number)
-    {
-        return number_format($number, 0, ',', ' ');
-    }
 }
