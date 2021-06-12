@@ -13,4 +13,31 @@ class OperationModel extends Model
             compact('typeOperation', 'montant', 'idCompte', 'idAgent')
         );
     }
+
+    public function historiques($idCompte)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE idCompte = :idCompte";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('idCompte'));
+        $historiques = $query->fetchAll(\PDO::FETCH_OBJ);
+        return $historiques;
+    }
+
+    public function historiqueRetraits($idCompte)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE idCompte = :idCompte AND typeOperation = 'retrait'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('idCompte'));
+        $historiques = $query->fetchAll(\PDO::FETCH_OBJ);
+        return $historiques;
+    }
+
+    public function historiqueDepots($idCompte)
+    {
+        $sql = "SELECT * FROM {$this->table} WHERE idCompte = :idCompte AND typeOperation = 'depot'";
+        $query = $this->pdo->prepare($sql);
+        $query->execute(compact('idCompte'));
+        $historiques = $query->fetchAll(\PDO::FETCH_OBJ);
+        return $historiques;
+    }
 }

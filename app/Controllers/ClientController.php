@@ -113,9 +113,4 @@ class ClientController extends Controller
             Renderer::render('client/show', compact('client'));
         }
     }
-
-    private function formateDate(string $date)
-    {
-        return date('d-m-Y', strtotime($date));
-    }
 }

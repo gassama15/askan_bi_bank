@@ -44,4 +44,13 @@ class CompteController extends Controller
             ]);
         }
     }
+
+    public function voirsolde()
+    {
+        $idCompte = $this->session->read('auth')->idCompte;
+        $solde = $this->model->getActualSolde($idCompte);
+        $solde = $this->formateNumber($solde);
+        $this->session->setFlash('success', "Votre solde est de $solde F CFA");
+        Http::redirect('index.php?controller=authController&task=espace');
+    }
 }

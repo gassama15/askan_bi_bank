@@ -134,4 +134,45 @@ class OperationController extends Controller
     {
         return $this->compteModel->getActualSolde($idCompte) > $montant;
     }
+
+    public function getallhistory()
+    {
+        $idCompte = $this->session->read('auth')->idCompte;
+        $historiques = $this->model->historiques($idCompte);
+        foreach ($historiques as $k => $v) {
+            $historiques[$k]->dateOperation = $this->formateDate(
+                $v->dateOperation
+            );
+            $historiques[$k]->montant = $this->formateNumber($v->montant);
+        }
+
+        Renderer::render('operation/all-history', compact('historiques'));
+    }
+
+    public function gethistoryretraits()
+    {
+        $idCompte = $this->session->read('auth')->idCompte;
+        $historiques = $this->model->historiqueRetraits($idCompte);
+        foreach ($historiques as $k => $v) {
+            $historiques[$k]->dateOperation = $this->formateDate(
+                $v->dateOperation
+            );
+            $historiques[$k]->montant = $this->formateNumber($v->montant);
+        }
+
+        Renderer::render('operation/history-retraits', compact('historiques'));
+    }
+    public function gethistorydepots()
+    {
+        $idCompte = $this->session->read('auth')->idCompte;
+        $historiques = $this->model->historiqueDepots($idCompte);
+        foreach ($historiques as $k => $v) {
+            $historiques[$k]->dateOperation = $this->formateDate(
+                $v->dateOperation
+            );
+            $historiques[$k]->montant = $this->formateNumber($v->montant);
+        }
+
+        Renderer::render('operation/history-depots', compact('historiques'));
+    }
 }

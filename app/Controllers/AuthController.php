@@ -52,6 +52,15 @@ class AuthController extends Controller
         Renderer::render('auth/login');
     }
 
+    public function signinform()
+    {
+        if ($this->session->read('auth')) {
+            $this->session->setFlash('danger', 'Vous êtes déjà connectés');
+            Http::redirect('index.php?controller=authController&task=espace');
+        }
+        Renderer::render('auth/connect');
+    }
+
     public function login()
     {
         if (!empty($_POST)) {
@@ -75,11 +84,41 @@ class AuthController extends Controller
         }
     }
 
+    public function signin()
+    {
+        if (!empty($_POST)) {
+            extract($_POST);
+            $user = $this->model->findByNumCompteAndPassword(
+                $num_compte,
+                $password
+            );
+            // var_dump($user);
+            // die();
+            if ($user) {
+                $this->connect($user);
+                $this->session->setFlash(
+                    'success',
+                    'Dalal ak diam si askan bi bank'
+                );
+                Http::redirect(
+                    'index.php?controller=authController&task=espace'
+                );
+            }
+            $this->session->setFlash(
+                'danger',
+                'Login et/ou mot de passe invalide(s)'
+            );
+            Renderer::render('auth/connect', [
+                'num_compte' => $_POST['num_compte'],
+            ]);
+        }
+    }
+
     public function logout()
     {
         $this->session->delete('auth');
         $this->session->setFlash('success', 'Nio ngui lay jajeufeul');
-        Http::redirect('index.php?controller=authController&task=index');
+        Renderer::render('auth/home');
     }
 
     public function espace()

@@ -3,13 +3,13 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <form action="index.php?controller=authController&task=login" method="POST">
+            <form action="index.php?controller=authController&task=signin" method="POST">
                 <fieldset>
-                    <legend>Authentification Espace Administration</legend>
+                    <legend>Authentification Espace Client</legend>
                     <div class="form-group">
-                        <label for="login" class="form-label mt-4">Login</label>
-                        <input required name="login" type="text" class="form-control" id="login"
-                            aria-describedby="emailHelp" placeholder="Entrez votre login" value="<?= $login ??
+                        <label for="num_compte" class="form-label mt-4">Login</label>
+                        <input required name="num_compte" type="text" class="form-control" id="login"
+                            aria-describedby="emailHelp" placeholder="Entrez votre Numéro de Compte" value="<?= $num_compte ??
                                 '' ?>">
                         <small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais votre login avec
                             qui

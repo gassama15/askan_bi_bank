@@ -96,6 +96,33 @@
                     </li>
                     <?php endif; ?>
                     <?php endif; ?>
+                    <?php if (isset($_SESSION['auth'])): ?>
+                    <?php if ($session->read('auth')->role === 'client'): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Consultation Solde</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?controller=compteController&task=voirsolde">Voir
+                                mon solde</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Consultation des opérations</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item"
+                                href="index.php?controller=operationController&task=getallhistory">Toutes les
+                                historiques</a>
+                            <a class="dropdown-item"
+                                href="index.php?controller=operationController&task=gethistoryretraits">Historique des
+                                retraits</a>
+                            <a class="dropdown-item"
+                                href="index.php?controller=operationController&task=gethistorydepots">Historique des
+                                dépôts</a>
+                        </div>
+                    </li>
+                    <?php endif; ?>
+                    <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <?php if (isset($_SESSION['auth'])): ?>
@@ -104,7 +131,10 @@
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a href="index.php?controller=authController&task=index" class="nav-link">Connexion</a>
+                        <a href="index.php?controller=authController&task=index" class="nav-link">Espace Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.php?controller=authController&task=signinform" class="nav-link">Espace Client</a>
                     </li>
                     <?php endif; ?>
                 </ul>
